@@ -1,0 +1,3 @@
+APP_NAME = 'CHANGEME'
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+REQUEST_INFO_LOG_IGNORE_PARAMS = 'passwd,password'
