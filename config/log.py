@@ -73,7 +73,7 @@ class LogConfigLoader:
         logger.disabled = True
 
     @staticmethod
-    def load_flask_app_logger_config(log_file):
+    def load_flask_app_logger_config(log_file, backupCount=0):
         logger = logging.getLogger('flask.app')
         logger.setLevel('INFO')
 
@@ -85,7 +85,7 @@ class LogConfigLoader:
         logger.addHandler(console_handler)
 
         time_file_handler = SafeTimedRotatingFileHandler(
-            log_file, when='MIDNIGHT', backupCount=0)
+            log_file, when='MIDNIGHT', backupCount=backupCount)
         time_file_handler.suffix = '%Y-%m-%d.log'
         time_file_handler.setFormatter(formatter)
         logger.addHandler(time_file_handler)
