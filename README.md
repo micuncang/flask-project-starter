@@ -51,7 +51,7 @@
 
 > conda系列
 
-* 在有网纯净环境下安装依赖，注意conda需要自己特定的安装包，安装包可从国内镜像下载对应版本，镜像推荐：[清华镜像](https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/)。如果使用conda install可以添加 '-c' 参数指定国内镜像
+* 在有网纯净环境下安装依赖，注意conda需要自己特定的安装包，安装包可从国内镜像下载对应版本，镜像推荐：[清华镜像](https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/)。如果使用conda install可以添加 '-c' 参数指定国内镜像(-c https://mirrors.ustc.edu.cn/anaconda/pkgs/main/)
 * 需要理解如下两种导出方式的区别：conda env export -n \<env-name\> > environment.yml 和 conda list -n \<env-name\> -e > requirements.txt，注意这两种方式都会包含python主体版本的信息
 * 借助conda list -n \<env-name\> -e | grep -Ev '\^#' > requirements-conda.txt生成工程所需模块依赖
 * conda安装目录下pkgs文件夹中会包含所有离线安装包，可以汇总拷贝至离线环境。使用awk -F'=' '{print $1"-"$2"-"$3".tar.bz2"}' requirements-conda.txt可以罗列出所有的模块依赖包，借助罗列的结果可以从pkgs中cp相应包然后离线传输至无网机器中。conda系列的离线安装要略复杂于pip
