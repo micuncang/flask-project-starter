@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [  -f "pid" ]; then
-  cat pid | xargs echo 'kill pid'
-  cat pid | xargs kill
+  echo "kill pid $(cat pid)"
+  kill "$(cat pid)"
   exit 0
 fi
 
