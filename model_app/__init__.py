@@ -46,7 +46,7 @@ def app_log(app):
 
 def app_aop(app):
     @app.errorhandler(Exception)
-    def global_exception_handler():
+    def global_exception_handler(error):
         app.logger.error(traceback.format_exc())
         return ResponseUtil.fail()
 

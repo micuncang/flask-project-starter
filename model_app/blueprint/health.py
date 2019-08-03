@@ -50,19 +50,20 @@ def exception():
     return 1 / 0
 
 
+def multi_log_task(logger):
+    try:
+        logger.info('multiprocess logger test')
+    except Exception as e:
+        current_app.logger.error(e)
+
+
 @mod.route("/multilog", methods=['GET'])
 def multiprocess_log():
-    def log_task(logger):
-        try:
-            logger.info('multiprocess logger test')
-        except Exception as e:
-            current_app.logger.error(e)
-
     multi_process_logger = LogConfigLoader.multiprocess_log_test_logger()
     pool = Pool(processes=2)
     try:
         for index in range(20000):
-            pool.apply_async(log_task(multi_process_logger), args=())
+            pool.apply_async(multi_log_task, args=(multi_process_logger,))
     finally:
         pool.close()
         pool.join()

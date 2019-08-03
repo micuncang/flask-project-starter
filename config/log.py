@@ -2,6 +2,7 @@ import logging
 import os
 import time
 from logging.handlers import TimedRotatingFileHandler
+from multiprocessing import Lock
 
 
 class SafeTimedRotatingFileHandler(TimedRotatingFileHandler):
@@ -9,6 +10,7 @@ class SafeTimedRotatingFileHandler(TimedRotatingFileHandler):
                  atTime=None):
         TimedRotatingFileHandler.__init__(
             self, filename, when, interval, backupCount, encoding, delay, utc, atTime)
+        self.roll_over_lock = Lock()
 
     def doRollover(self):
         """
@@ -38,12 +40,12 @@ class SafeTimedRotatingFileHandler(TimedRotatingFileHandler):
                 timeTuple = time.localtime(t + addend)
         dfn = self.rotation_filename(self.baseFilename + "." +
                                      time.strftime(self.suffix, timeTuple))
-        self.lock.acquire()
+        self.roll_over_lock.acquire()
         try:
             if not os.path.exists(dfn) and os.path.exists(self.baseFilename):
                 os.rename(self.baseFilename, dfn)
         finally:
-            self.lock.release()
+            self.roll_over_lock.release()
         if self.backupCount > 0:
             for s in self.getFilesToDelete():
                 os.remove(s)
