@@ -57,6 +57,7 @@
 * conda安装目录下pkgs文件夹中会包含所有离线安装包，可以汇总拷贝至离线环境。使用awk -F'=' '{print $1"-"$2"-"$3".tar.bz2"}' requirements-conda.txt可以罗列出所有的模块依赖包，借助罗列的结果可以从pkgs中cp相应包然后离线传输至无网机器中。conda系列的离线安装要略复杂于pip
 * 如果安装包过多，可采用脚本方式(for each)借助conda install -n \<env-name\> --use-local安装
 * 如果已安装conda-build，可以尝试local-channel，[点击查看具体教程](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/create-custom-channels.html)。建议添加 '--override-channels' 参数
+* conda仓库维护的模块种类要少于pip，如果想统一模块维护方式，建议统一使用pip
 
 > pip系列
 
