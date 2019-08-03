@@ -40,12 +40,9 @@ class SafeTimedRotatingFileHandler(TimedRotatingFileHandler):
                 timeTuple = time.localtime(t + addend)
         dfn = self.rotation_filename(self.baseFilename + "." +
                                      time.strftime(self.suffix, timeTuple))
-        self.roll_over_lock.acquire()
-        try:
+        with self.roll_over_lock:
             if not os.path.exists(dfn) and os.path.exists(self.baseFilename):
                 os.rename(self.baseFilename, dfn)
-        finally:
-            self.roll_over_lock.release()
         if self.backupCount > 0:
             for s in self.getFilesToDelete():
                 os.remove(s)
