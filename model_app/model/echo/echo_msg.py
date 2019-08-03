@@ -2,6 +2,8 @@ import pkg_resources
 
 
 class EchoMsg:
+    __data = None
+
     @staticmethod
     def go(msg):
         return EchoMsg.__data.format(msg)
@@ -12,5 +14,5 @@ def __load_data():
         return f.readline()
 
 
-'''模型在启动时加载初始化文件一次是一种常见的场景，可参照该实现方式'''
+"""模型在启动时加载初始化文件一次是一种常见的场景，可参照该实现方式"""
 EchoMsg._EchoMsg__data = __load_data()

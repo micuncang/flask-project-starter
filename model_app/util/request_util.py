@@ -1,12 +1,12 @@
-from flask import request, current_app
+from flask import current_app
 
 
 class RequestUtil:
     @staticmethod
-    def __dict_pretty(dict):
+    def __dict_pretty(dict_data):
         ignore_param_list = current_app.config['REQUEST_INFO_LOG_IGNORE_PARAMS'].split(
             ',')
-        param_dict = dict.to_dict()
+        param_dict = dict_data.to_dict()
         for param in ignore_param_list:
             if param in param_dict:
                 del param_dict[param]

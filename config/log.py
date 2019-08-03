@@ -1,15 +1,14 @@
 import logging
-import time 
 import os
+import time
 from logging.handlers import TimedRotatingFileHandler
-from multiprocessing import Lock
 
 
 class SafeTimedRotatingFileHandler(TimedRotatingFileHandler):
-    def __init__(self, filename, when='h', interval=1, backupCount=0, encoding=None, delay=False, utc=False, atTime=None):
+    def __init__(self, filename, when='h', interval=1, backupCount=0, encoding=None, delay=False, utc=False,
+                 atTime=None):
         TimedRotatingFileHandler.__init__(
             self, filename, when, interval, backupCount, encoding, delay, utc, atTime)
-        lock = Lock()
 
     def doRollover(self):
         """
@@ -59,7 +58,7 @@ class SafeTimedRotatingFileHandler(TimedRotatingFileHandler):
             if dstNow != dstAtRollover:
                 if not dstNow:  # DST kicks in before next rollover, so we need to deduct an hour
                     addend = -3600
-                else:           # DST bows out before next rollover, so we need to add an hour
+                else:  # DST bows out before next rollover, so we need to add an hour
                     addend = 3600
                 newRolloverAt += addend
         self.rolloverAt = newRolloverAt

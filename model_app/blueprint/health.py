@@ -1,6 +1,7 @@
-from flask import Blueprint, current_app, request
 from datetime import datetime
 from multiprocessing import Pool
+
+from flask import Blueprint, current_app, request
 
 from config.log import LogConfigLoader
 from ..util.response_util import ResponseUtil
@@ -28,9 +29,9 @@ def echo_data():
 
 @mod.route("/echo_form", methods=['POST'])
 def echo_form():
-    '''
+    """
     curl -XPOST -H 'enctype=multipart/form-data' http://localhost:5000/health/echo_form -F 'testfile=@/yourfilepath'
-    '''
+    """
     json_file = request.files['testfile']
     try:
         result = bytes.decode(json_file.read())
@@ -51,9 +52,9 @@ def exception():
 
 @mod.route("/multilog", methods=['GET'])
 def multiprocess_log():
-    def log_task(multi_process_logger):
+    def log_task(logger):
         try:
-            multi_process_logger.info('multiprocess logger test')
+            logger.info('multiprocess logger test')
         except Exception as e:
             current_app.logger.error(e)
 

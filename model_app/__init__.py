@@ -1,14 +1,14 @@
-from flask import Flask, request
 import traceback
-import os
+
+from flask import Flask, request
 
 from config.log import LogConfigLoader
-from .util.response_util import ResponseUtil
 from .util.request_util import RequestUtil
+from .util.response_util import ResponseUtil
 
 
 def create_app(instance_config_filename):
-    '''create_app设计参照: http://flask.pocoo.org/docs/1.0/patterns/appfactories/'''
+    """create_app设计参照: http://flask.pocoo.org/docs/1.0/patterns/appfactories/"""
 
     app = Flask(__name__, instance_relative_config=True)
 
@@ -28,7 +28,7 @@ def create_app(instance_config_filename):
 
 
 def app_config(app, instance_config_filename):
-    '''不要更改配置文件加载的顺序'''
+    """不要更改配置文件加载的顺序"""
     app.config.from_object('config.default')
     app.config.from_envvar('APP_CONFIG_FILE')
     app.config.from_pyfile(instance_config_filename)
@@ -38,15 +38,15 @@ def app_config(app, instance_config_filename):
 
 
 def app_log(app):
-    '''加载日志配置'''
+    """加载日志配置"""
     LogConfigLoader.close_werkzeug_logger()
     LogConfigLoader.load_flask_app_logger_config(
-        app.config['LOG_FILE'], app.config['LOG_BACKUPCOUNT'])
+        app.config['LOG_FILE'], app.config['LOG_BACKUP_COUNT'])
 
 
 def app_aop(app):
     @app.errorhandler(Exception)
-    def global_exception_handler(error):
+    def global_exception_handler():
         app.logger.error(traceback.format_exc())
         return ResponseUtil.fail()
 

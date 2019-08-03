@@ -1,5 +1,6 @@
-from flask import Blueprint, current_app, send_from_directory
 import os
+
+from flask import Blueprint, current_app, send_from_directory
 
 mod = Blueprint('base', __name__)
 

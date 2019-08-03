@@ -1,3 +1,3 @@
 WHERE = 'staging'
 LOG_FILE = '/tmp/model.log'
-LOG_BACKUPCOUNT = 90
+LOG_BACKUP_COUNT = 90

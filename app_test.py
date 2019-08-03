@@ -1,8 +1,8 @@
 import os
 
-os.environ['APP_CONFIG_FILE'] = os.path.abspath('config/env/development.py')
+from model_app import create_app
 
-from model_app import create_app 
+os.environ['APP_CONFIG_FILE'] = os.path.abspath('config/env/development.py')
 
 app = create_app('config.py')
 
