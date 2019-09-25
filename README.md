@@ -16,9 +16,21 @@
 
 > 虚拟环境可以按需进行调整，此处采用Python3的venv模块
 
+##### 使用master分支
 * git clone git@github.com:micuncang/flask-project-starter.git <strong>YOURAPPNAME</strong>
 * cd <strong>YOURAPPNAME</strong> && mkdir instance && cd instance && touch config.py && cd ..
 * git remote remove origin
+* python3 -m venv venv && source venv/bin/activate
+* pip install -r requirements.txt
+* sh start.sh
+* curl http://localhost:5000/health/ping
+* sh stop.sh
+
+##### 使用特定xxx分支
+* git clone -b xxx git@github.com:micuncang/flask-project-starter.git <strong>YOURAPPNAME</strong>
+* cd <strong>YOURAPPNAME</strong> && mkdir instance && cd instance && touch config.py && cd ..
+* git remote remove origin
+* git branch -m xxx master
 * python3 -m venv venv && source venv/bin/activate
 * pip install -r requirements.txt
 * sh start.sh
