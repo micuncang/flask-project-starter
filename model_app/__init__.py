@@ -40,8 +40,8 @@ def app_config(app, instance_config_filename):
 def app_log(app):
     """加载日志配置"""
     LogConfigLoader.close_werkzeug_logger()
-    LogConfigLoader.load_flask_app_logger_config(
-        app.config['LOG_FILE'], app.config['LOG_BACKUP_COUNT'])
+    LogConfigLoader.load_flask_app_logger_config(app.name,
+                                                 app.config['LOG_FILE'], app.config['LOG_BACKUP_COUNT'])
 
 
 def app_aop(app):

@@ -71,8 +71,8 @@ class LogConfigLoader:
         logger.disabled = True
 
     @staticmethod
-    def load_flask_app_logger_config(log_file, backupCount=0):
-        logger = logging.getLogger('flask.app')
+    def load_flask_app_logger_config(app_name, log_file, backupCount=0):
+        logger = logging.getLogger(app_name)
         logger.setLevel('INFO')
 
         formatter = logging.Formatter(
