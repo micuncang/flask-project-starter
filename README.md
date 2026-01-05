@@ -77,3 +77,4 @@
 * 借助pip freeze > requirements.txt生成工程所需模块依赖
 * 借助pip download下载所需模块文件，pip download -d pkgs/ -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/ ，其中借助了清华的镜像
 * 拷贝pkgs/下模块文件离线传输至无网机器中，使用pip install安装相应模块，pip install --no-index -f file:///\<file-path\>/pkgs/ -r requirements.txt。除非有足够的把握，应当谨慎使用 '--ignore-installed' 参数
+
